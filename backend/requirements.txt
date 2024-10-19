@@ -3,3 +3,4 @@ fastapi-cors
 pydantic
 sqlalchemy
 uvicorn
+python-dotenv

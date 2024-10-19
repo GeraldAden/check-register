@@ -36,4 +36,3 @@ Use the following technologies to implement the API:
 - FastAPI
 - SQLAlchemy
 - SQLite
-

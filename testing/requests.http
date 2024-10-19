@@ -1,0 +1,7 @@
+### All checks
+GET http://127.0.0.1:8000/chkreg
+Accept: application/json
+
+### Check CHK00005
+GET http://127.0.0.1:8000/chkreg/CHK00005
+Accept: application/json

@@ -1,0 +1,39 @@
+Create an API for accessing the database described by the following sqlite sql:
+
+CREATE TABLE Codes (
+    CheckCode CHAR(3) NOT NULL,
+    Description VARCHAR(100) NOT NULL,
+    Category VARCHAR(100) NOT NULL,
+    Status VARCHAR(10),
+    PRIMARY KEY (CheckCode)
+);
+
+-- Create the CHKREG_2024 table
+CREATE TABLE CHKREG_2024 (
+    CheckNO CHAR(8) NOT NULL,
+    checkDate TEXT NOT NULL,  -- SQLite uses TEXT for dates, or you can store as INTEGER (Unix time)
+    checkCode CHAR(3) NOT NULL,
+    checkAmount REAL NOT NULL,  -- SQLite does not have a MONEY type, use REAL or INTEGER
+    checkDescription VARCHAR(100) NOT NULL,
+    checkUserDef1 VARCHAR(10),
+    checkUserDef2 VARCHAR(10)
+);
+
+The requirements for the API are as follows:
+1. The API should be able to return all the records in the CHKREG_2024 table.
+2. The API should be able to return a single record from the CHKREG_2024 table by its CheckNO.
+3. The API should be able to return all the records in the CHKREG_2024 table that have a checkCode that matches a given CheckCode.
+4. The API should be able to return all the records in the CHKREG_2024 table that have a checkAmount greater than a given amount.
+5. The API should be able to return all the records in the CHKREG_2024 table that have a checkDate between two given dates.
+6. The API should be able to return all the records in the CHKREG_2024 table that have a checkDescription that contains a given string.
+7. The API should be able to return all the records in the CHKREG_2024 table that have a checkUserDef1 or checkUserDef2 that matches a given string.
+8. The API should be able to update a record in the CHKREG_2024 table by its CheckNO.
+9. The API should be able to delete a record from the CHKREG_2024 table by its CheckNO.
+10. The API should be able to insert a new record into the CHKREG_2024 table.
+
+Use the following technologies to implement the API:
+- Python
+- FastAPI
+- SQLAlchemy
+- SQLite
+

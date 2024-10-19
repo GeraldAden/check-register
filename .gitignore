@@ -20,3 +20,5 @@ backend/.venv/
 backend/__pycache__/
 database/check_register.db
 frontend/node_modules/
+
+.vscode/

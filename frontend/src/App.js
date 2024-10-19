@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 import AllEntries from './AllEntries';
-import SingleEntry from './SingleEntry';
+import FindEntry from './FindEntry';
 import CreateEntry from './CreateEntry';
 
 function App() {
@@ -14,14 +14,14 @@ function App() {
             Check Registry
           </Typography>
           <Button color="inherit" component={Link} to="/">All Entries</Button>
-          <Button color="inherit" component={Link} to="/single">Single Entry</Button>
+          <Button color="inherit" component={Link} to="/find">Find Entry</Button>
           <Button color="inherit" component={Link} to="/create">Create Entry</Button>
         </Toolbar>
       </AppBar>
       <Container>
         <Routes>
           <Route path="/" element={<AllEntries />} />
-          <Route path="/single" element={<SingleEntry />} />
+          <Route path="/find" element={<FindEntry />} />
           <Route path="/create" element={<CreateEntry />} />
         </Routes>
       </Container>

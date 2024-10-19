@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, List, ListItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, Alert } from '@mui/material';
 
-const SingleEntry = () => {
+const FindEntry = () => {
   const [checkNo, setCheckNo] = useState('');
   const [entry, setEntry] = useState(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -196,4 +196,4 @@ const SingleEntry = () => {
   );
 };
 
-export default SingleEntry;
+export default FindEntry;

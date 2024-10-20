@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, List, ListItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, Alert } from '@mui/material';
+import { Container, Typography, TextField, Button, List, ListItem, Snackbar, Alert } from '@mui/material';
+import AllEntries from './AllEntries';
 
 const FindEntry = () => {
   const [checkNo, setCheckNo] = useState('');
@@ -10,6 +11,9 @@ const FindEntry = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [dateRangeEntries, setDateRangeEntries] = useState([]);
 
   const fetchEntry = () => {
     axios.get(`http://127.0.0.1:8000/chkreg/${checkNo}`)
@@ -22,12 +26,25 @@ const FindEntry = () => {
       });
   };
 
-  const handleDeleteClickOpen = () => {
-    setDeleteOpen(true);
+  const searchByDateRange = () => {
+    axios.get(`http://127.0.0.1:8000/chkreg/date_range`, {
+      params: {
+        start_date: startDate,
+        end_date: endDate
+      }
+    })
+    .then(response => setDateRangeEntries(response.data))
+    .catch(error => {
+      console.error(error);
+      setSnackbarMessage('Failed to fetch entries');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+    });
   };
 
-  const handleUpdateClickOpen = () => {
-    setUpdateOpen(true);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEntry({ ...entry, [name]: value });
   };
 
   const handleClose = () => {
@@ -73,11 +90,6 @@ const FindEntry = () => {
         setSnackbarSeverity('error');
         setSnackbarOpen(true);
       });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEntry({ ...entry, [name]: value });
   };
 
   return (
@@ -141,54 +153,43 @@ const FindEntry = () => {
               fullWidth
             />
           </ListItem>
-          <Button variant="contained" color="primary" onClick={handleUpdateClickOpen}>Update Entry</Button>
-          <Button variant="contained" color="secondary" onClick={handleDeleteClickOpen}>Delete Entry</Button>
-          <Dialog
-            open={deleteOpen}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Are you sure you want to delete this entry?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={deleteEntry} color="secondary" autoFocus>
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog
-            open={updateOpen}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Confirm Update"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Are you sure you want to update this entry?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={updateEntry} color="primary" autoFocus>
-                Update
-              </Button>
-            </DialogActions>
-          </Dialog>
         </List>
       )}
+
+      <Typography variant="h4">Search Entries by Date Range</Typography>
+      <TextField
+        label="Start Date"
+        type="date"
+        value={startDate}
+        onChange={e => setStartDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <TextField
+        label="End Date"
+        type="date"
+        value={endDate}
+        onChange={e => setEndDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <Button variant="contained" onClick={searchByDateRange}>Search</Button>
+      {dateRangeEntries.length > 0 && (
+        <List>
+          {dateRangeEntries.map(entry => (
+            <ListItem key={entry.CheckNO}>
+              <Typography>{`CheckNO: ${entry.CheckNO}, Date: ${entry.checkDate}, Amount: ${entry.checkAmount}`}</Typography>
+            </ListItem>
+          ))}
+        </List>
+      )}
+
+      <AllEntries />
+
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
-        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity}>
           {snackbarMessage}
         </Alert>
       </Snackbar>

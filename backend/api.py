@@ -16,6 +16,7 @@ app = FastAPI()
 # Define SQLite database connection
 #DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///../database/check_register.db")
 DATABASE_URL = os.getenv("DATABASE_URL")
+print(f"Database URL: {DATABASE_URL}")
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

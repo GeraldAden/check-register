@@ -1,7 +1,11 @@
-### All checks
+### All checks (local)
 GET http://127.0.0.1:8000/chkreg
 Accept: application/json
 
-### Check CHK00005
+### Check CHK00005 (local)
 GET http://127.0.0.1:8000/chkreg/CHK00005
+Accept: application/json
+
+### All checks (wsl)
+GET http://172.31.17.19:8000/chkreg
 Accept: application/json

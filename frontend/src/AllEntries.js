@@ -13,8 +13,10 @@ const AllEntries = () => {
     fetchAllEntries();
   }, []);
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const fetchAllEntries = () => {
-    axios.get(`http://127.0.0.1:8000/chkreg`)
+    axios.get(`${apiUrl}/chkreg`)
       .then(response => setAllEntries(response.data))
       .catch(error => {
         console.error(error);

@@ -18,8 +18,10 @@ const UpdateRecord = () => {
     setUpdatedRecord({ ...updatedRecord, [e.target.name]: e.target.value });
   };
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const updateRecord = () => {
-    axios.put(`http://127.0.0.1:8000/chkreg/${checkNo}`, updatedRecord)
+    axios.put(`${apiUrl}/chkreg/${checkNo}`, updatedRecord)
       .then(response => console.log(response.data))
       .catch(error => console.error(error));
   };

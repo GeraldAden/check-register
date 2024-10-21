@@ -56,6 +56,7 @@ def get_db():
 # Add CORS middleware
 origins = [
     "http://localhost:3000",
+    "http://localhost:8080"
 ]
 
 app.add_middleware(

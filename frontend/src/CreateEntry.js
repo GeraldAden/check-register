@@ -22,8 +22,9 @@ const CreateEntry = () => {
   };
 
   const handleClickOpen = () => {
-    // Check if the check number already exists
-    axios.get(`http://127.0.0.1:8000/chkreg/${newEntry.CheckNO}`)
+    const apiUrl = process.env.REACT_APP_API_URL;
+      // Check if the check number already exists
+    axios.get(`${apiUrl}/chkreg/${newEntry.CheckNO}`)
       .then(response => {
         if (response.data) {
           setSnackbarMessage('Check number already exists');
@@ -53,8 +54,10 @@ const CreateEntry = () => {
     setSnackbarOpen(false);
   };
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const createEntry = () => {
-    axios.post('http://127.0.0.1:8000/chkreg', newEntry)
+    axios.post(`${apiUrl}/chkreg`, newEntry)
       .then(response => {
         console.log(response.data);
         setSnackbarMessage('Entry successfully created');

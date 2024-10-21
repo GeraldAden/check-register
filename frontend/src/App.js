@@ -6,6 +6,8 @@ import FindEntry from './FindEntry';
 import CreateEntry from './CreateEntry';
 
 function App() {
+  console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
+
   return (
     <Router>
       <AppBar position="static">

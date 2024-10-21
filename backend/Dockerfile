@@ -10,11 +10,11 @@ COPY requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
-COPY . .
+# Copy the application code into the container
+COPY api.py .
 
 # Set the environment variable for the database URL
-ENV DATABASE_URL="sqlite:///app/database/check_register.db"
+ENV DATABASE_URL="sqlite:////app/database/check_register.db"
 
 # Expose the port the app runs on
 EXPOSE 8000

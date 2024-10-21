@@ -5,8 +5,10 @@ import { Container, Typography, TextField, Button } from '@mui/material';
 const DeleteRecord = () => {
   const [checkNo, setCheckNo] = useState('');
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const deleteRecord = () => {
-    axios.delete(`http://127.0.0.1:8000/chkreg/${checkNo}`)
+    axios.delete(`${apiUrl}/chkreg/${checkNo}`)
       .then(response => console.log(response.data))
       .catch(error => console.error(error));
   };

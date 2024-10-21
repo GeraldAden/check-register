@@ -17,7 +17,7 @@ frontend/dist
 .vscode-test
 
 backend/.venv/
-backend/venv/
+backend/.venv-wsl/
 backend/__pycache__/
 database/check_register.db
 frontend/node_modules/

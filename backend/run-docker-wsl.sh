@@ -1,1 +1,1 @@
-docker run -d -p 8000:8000 -v /mnt/c/Users/gmade/Development/sandbox/web/check-registry/database:/app/database --name check-register-backend check-register-backend
+docker run -d -p 8000:8000 -v /mnt/c/Users/gmade/Development/sandbox/web/check-register/database:/app/database --name check-register-backend check-register-backend

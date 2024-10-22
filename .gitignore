@@ -4,6 +4,7 @@ backend/.env.development.local
 backend/.env.test.local
 backend/.env.production.local
 backend/.env.local
+backend/database/
 
 # Next.js build output
 frontend/.next

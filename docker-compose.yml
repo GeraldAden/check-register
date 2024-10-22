@@ -1,11 +1,22 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+  check-register-frontend:
+    container_name: check-register-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - REACT_APP_BACKEND_API_URL=http://localhost:8000
+
+  check-register-backend:
+    container_name: check-register-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
-    environment:
-      - DATABASE_URL=sqlite:///./check_register.db
+      - ./backend/database:/app/database

@@ -14,9 +14,9 @@ RUN npm install
 COPY . .
 
 # Set environment variable for the backend API URL
-ARG BACKEND_API_URL
-ENV REACT_APP_API_URL=${BACKEND_API_URL}
-RUN echo "REACT_APP_API_URL=${REACT_APP_API_URL}"
+# ARG BACKEND_API_URL
+# ENV REACT_APP_API_URL=${BACKEND_API_URL}
+# RUN echo "REACT_APP_API_URL=${REACT_APP_API_URL}"
 
 # Build the React app
 RUN npm run build

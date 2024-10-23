@@ -1,26 +1,16 @@
-# dotenv environment variable files
 backend/.env
 backend/.env.development.local
 backend/.env.test.local
 backend/.env.production.local
 backend/.env.local
-backend/database/
-
-# Next.js build output
-frontend/.next
-frontend/out
-
-# Nuxt.js build / generate output
-frontend/.nuxt
-frontend/dist
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
 backend/.venv/
+backend/venv/
 backend/.venv-wsl/
 backend/__pycache__/
-database/check_register.db
+backend/database/
+
 frontend/node_modules/
+
+database/check_register.db
 
 .vscode/

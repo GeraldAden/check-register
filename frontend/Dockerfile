@@ -1,34 +1,26 @@
-# Use an official Node.js runtime as a parent image
-FROM node:16-alpine
+# Stage 1: Build the React app
+FROM node:14 AS build
 
-# Set the working directory in the container
+# Set build-time environment variables
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
+
 WORKDIR /app
-
-# Copy the package.json and package-lock.json files to the container
-COPY package*.json ./
-
-# Install the dependencies
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-
-# Copy the application to the container
-COPY . .
-
-# Set environment variable for the backend API URL
-# ARG BACKEND_API_URL
-# ENV REACT_APP_API_URL=${BACKEND_API_URL}
-# RUN echo "REACT_APP_API_URL=${REACT_APP_API_URL}"
-
-# Build the React app
+COPY . ./
 RUN npm run build
 
-# Use an official Nginx image to serve the React app
+# Stage 2: Serve the React app
 FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy the build output to the Nginx html directory
-COPY --from=0 /app/build /usr/share/nginx/html
+# Set runtime environment variables
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx when the container launches
+# Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

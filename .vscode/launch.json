@@ -11,6 +11,9 @@
                 "--reload"
             ],
             "jinja": true,
+            "env": {
+                "DATABASE_URL": "sqlite:///../database/check_register.db"
+            },
             "cwd": "${workspaceFolder}/backend"
         },
         {

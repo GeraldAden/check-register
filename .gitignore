@@ -12,5 +12,3 @@ backend/database/
 frontend/node_modules/
 
 database/check_register.db
-
-.vscode/
